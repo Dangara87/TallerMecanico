@@ -4,6 +4,7 @@ import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepci
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 public class Revision {
@@ -22,15 +23,19 @@ public class Revision {
         setCliente(cliente);
         setVehiculo(vehiculo);
         setFechaInicio(fechaInicio);
+        fechaFin = null;
+        horas = 0;
+        precioMaterial = 0;
     }
 
     public Revision(Revision revision) {
-        if (revision == null) {
-            throw new NullPointerException("La revisión no puede ser nula.");
-        }
-        setCliente(revision.cliente);
-        setVehiculo(revision.vehiculo);
-        setFechaInicio(revision.fechaInicio);
+        Objects.requireNonNull(revision, "La revisión no puede ser nula.");
+        cliente = new Cliente(revision.cliente);
+        vehiculo = revision.vehiculo;
+        fechaInicio = revision.fechaInicio;
+        fechaFin = revision.fechaFin;
+        horas = revision.horas;
+        precioMaterial = revision.precioMaterial;
     }
 
     public Cliente getCliente() {
@@ -74,6 +79,10 @@ public class Revision {
             throw new IllegalArgumentException("La fecha de fin no puede ser futura.");
         }
 
+        if (fechaFin.isBefore(fechaInicio)) {
+            throw new IllegalArgumentException("La fecha de fin no puede ser anterior a la fecha de inicio.");
+        }
+
         this.fechaFin = fechaFin;
     }
 
@@ -106,11 +115,14 @@ public class Revision {
     }
 
     public boolean estaCerrada() {
-        return false;
+        return (fechaFin != null);
     }
 
     public void cerrar(LocalDate fechaFin) {
-
+        if (estaCerrada()) {
+            throw new TallerMecanicoExcepcion("La revisión ya está cerrada.");
+        }
+        setFechaFin(fechaFin);
     }
 
     public float getPrecio() {
@@ -118,23 +130,29 @@ public class Revision {
     }
 
     public float getDias() {
-        return 2;
+        float dias;
+        if (fechaFin == null) {
+            dias = 0;
+        } else {
+            dias = ChronoUnit.DAYS.between(fechaInicio, fechaFin);
+        }
+        return dias;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Revision revision = (Revision) o;
-        return horas == revision.horas && Float.compare(precioMaterial, revision.precioMaterial) == 0 && Objects.equals(fechaInicio, revision.fechaInicio) && Objects.equals(fechaFin, revision.fechaFin) && Objects.equals(cliente, revision.cliente) && Objects.equals(vehiculo, revision.vehiculo);
+        return Objects.equals(fechaInicio, revision.fechaInicio) && Objects.equals(cliente, revision.cliente) && Objects.equals(vehiculo, revision.vehiculo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fechaInicio, fechaFin, horas, precioMaterial, cliente, vehiculo);
+        return Objects.hash(fechaInicio, cliente, vehiculo);
     }
 
     @Override
     public String toString() {
-        return (fechaFin == null) ? String.format("%s - %s: (%s - ), %s horas, %.2f € en material", cliente, vehiculo, fechaInicio.format(FORMATO_FECHA), horas, precioMaterial) : String.format("%s - %s: (%s - %s), %s horas, %.2f € en material, %s € total", cliente, vehiculo, fechaInicio.format(FORMATO_FECHA), fechaFin.format(FORMATO_FECHA), horas, precioMaterial, getPrecio());
+        return (fechaFin == null) ? String.format("%s - %s: (%s - ), %s horas, %.2f € en material", cliente, vehiculo, fechaInicio.format(FORMATO_FECHA), horas, precioMaterial) : String.format("%s - %s: (%s - %s), %s horas, %.2f € en material, %.2f € total", cliente, vehiculo, fechaInicio.format(FORMATO_FECHA), fechaFin.format(FORMATO_FECHA), horas, precioMaterial, getPrecio());
     }
 }

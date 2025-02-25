@@ -12,7 +12,7 @@ import java.util.Objects;
 
 public class Revisiones {
 
-    private List<Revision> coleccionRevision;
+    private final List<Revision> coleccionRevision;
 
     public Revisiones() {
         coleccionRevision = new ArrayList<>();
@@ -67,14 +67,18 @@ public class Revisiones {
     }
 
     public Revision anadirHoras(Revision revision, int horas) {
-        
+        Revision revisionEncontrada = getRevision(revision);
+        revisionEncontrada.anadirHoras(horas);
+        return revisionEncontrada;
     }
 
     private Revision getRevision(Revision revision) {
-        if (revision == null) {
+        Objects.requireNonNull(revision, "No puedo operar sobre una revisión nula.");
+        Revision revisionEncontrada = buscar(revision);
+        if (revisionEncontrada == null) {
             throw new TallerMecanicoExcepcion("No existe ninguna revisión igual.");
         }
-        return revision;
+        return revisionEncontrada;
     }
 
     public Revision anadirPrecioMaterial(Revision revision, float precioMaterial) {
@@ -98,7 +102,7 @@ public class Revisiones {
     public void borrar(Revision revision) {
         Objects.requireNonNull(revision, "No se puede borrar una revisión nula.");
         if (!coleccionRevision.contains(revision)) {
-            throw new TallerMecanicoExcepcion("NO existe ninguna revisión igual");
+            throw new TallerMecanicoExcepcion("No existe ninguna revisión igual.");
         }
         coleccionRevision.remove(revision);
 

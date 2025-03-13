@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Cliente {
     private static final String ER_NOMBRE = "^([A-ZÁÉÍÓÚ][a-záéíóú]+)( [A-ZÁÉÍÓÚ][a-záéíóú]+)*$";
-    private static final String ER_DNI = "(\\d{8})([A-Z]{1})";
+    private static final String ER_DNI = "(\\d{8})([A-Z])";
     private static final String ER_TELEFONO = "\\d{9}";
     private String nombre;
     private String dni;

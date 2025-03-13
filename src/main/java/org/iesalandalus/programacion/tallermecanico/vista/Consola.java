@@ -15,13 +15,13 @@ public class Consola {
 
     private Consola() {}
 
-    public void mostrarCabecera(String mensaje) {
+    public static void mostrarCabecera(String mensaje) {
         Objects.requireNonNull(mensaje);
         System.out.printf("%n%s%n", mensaje);
         System.out.printf(String.format("%s%n", ("-").repeat(mensaje.length())));
     }
 
-    public void mostrarMenu() {
+    public static void mostrarMenu() {
         mostrarCabecera("MENÚ");
         for (Opcion opcion : Opcion.values()) {
             System.out.printf("%s%n", opcion);
@@ -29,7 +29,7 @@ public class Consola {
         System.out.println();
     }
 
-    public Opcion elegirOpcion() {
+    public static Opcion elegirOpcion() {
         Opcion opcion = null;
         do {
             try {
@@ -41,25 +41,25 @@ public class Consola {
         return opcion;
     }
 
-    private int leerEntero(String mensaje) {
+    private static int leerEntero(String mensaje) {
         Objects.requireNonNull(mensaje);
         System.out.print(mensaje);
         return Entrada.entero();
     }
 
-    private float leerReal(String mensaje) {
+    private static float leerReal(String mensaje) {
         Objects.requireNonNull(mensaje);
         System.out.print(mensaje);
         return Entrada.real();
     }
 
-    private String leerCadena(String mensaje) {
+    private static String leerCadena(String mensaje) {
         Objects.requireNonNull(mensaje);
         System.out.print(mensaje);
         return Entrada.cadena();
     }
 
-    private LocalDate leerFecha(String mensaje) {
+    private static LocalDate leerFecha(String mensaje) {
         LocalDate fecha = null;
         boolean fechaCorrecta = false;
         do {
@@ -73,47 +73,47 @@ public class Consola {
         return fecha;
     }
 
-    public Cliente leerCliente() {
+    public static Cliente leerCliente() {
         return new Cliente(leerCadena("Dime el nombre del cliente: "), leerCadena("Dime el dni del cliente: "), leerCadena("Dime el teléfono del cliente: "));
     }
 
-    public Cliente leerClienteDni() {
+    public static Cliente leerClienteDni() {
         return new Cliente(Cliente.get(leerCadena("Dime el DNI del cliente: ")));
     }
 
-    public String leerNuevoNombre() {
+    public static String leerNuevoNombre() {
         String nombre;
         nombre = leerCadena("Dime el nuevo nombre del cliente: ");
-        if (!nombre.isBlank()) {
-            new Cliente(nombre, )
-        }
+        return nombre;
     }
 
-    public String leerNuevoTelefono() {
-
+    public static String leerNuevoTelefono() {
+        String telefono;
+        telefono = leerCadena("Dime el nuevo teléfono del cliente: ");
+        return telefono;
     }
 
-    public Vehiculo leerVehiculo() {
-
+    public static Vehiculo leerVehiculo() {
+        return new Vehiculo(leerCadena("Dime la marca del vehículo: "), leerCadena("Dime el modelo del vehículo"), leerCadena("Dime la matrícula del vehículo: "));
     }
 
-    public Vehiculo leerVehiculoMatricula() {
-
+    public static Vehiculo leerVehiculoMatricula() {
+        return Vehiculo.get(leerCadena("Dime la matrícula del vehículo: "));
     }
 
-    public Revision leerRevision() {
-
+    public static Revision leerRevision() {
+        return new Revision(leerClienteDni(), leerVehiculoMatricula(), leerFecha("Dime la fecha de inicio de trabajo: "));
     }
 
-    public int leerHoras() {
-
+    public static int leerHoras() {
+        return leerEntero("Dime las horas que quieras añadir: ");
     }
 
-    public float leerPrecioMaterial() {
-
+    public static float leerPrecioMaterial() {
+        return leerReal("Dime el precio que quieres añadir: ");
     }
 
-    public LocalDate leerFechaCierre() {
-        
+    public static LocalDate leerFechaCierre() {
+        return leerFecha("Dime la fecha de cierre: ");
     }
 }

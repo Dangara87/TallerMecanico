@@ -1,6 +1,6 @@
 # Tarea: Taller mecánico
 ## Profesor: José Ramón Jiménez Reyes
-## Alumno:
+## Alumno: Jose Daniel García Salamanca
 
 En este repositorio iremos subiendo las diferentes versiones o sprint de nuestro proyecto.
 Trabajaremos por ramas que luego las integraremos en esta principal y las iremos etiquetando.

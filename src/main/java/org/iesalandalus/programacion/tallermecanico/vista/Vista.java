@@ -40,7 +40,9 @@ public class Vista {
                 case BUSCAR_REVISION -> buscarRevision();
                 case MODIFICAR_CLIENTE -> modificarCliente();
                 case ANADIR_HORAS_REVISION -> anadirHoras();
+                /*
                 case ANADIR_PRECIO_MATERIAL_REVISION -> anadirPrecioMaterial();
+                 */
                 case CERRAR_REVISION -> cerrarRevision();
                 case BORRAR_CLIENTE -> borrarCliente();
                 case BORRAR_VEHICULO -> borrarVehiculo();
@@ -104,13 +106,13 @@ public class Vista {
         controlador.anadirHoras(Consola.leerRevision(), Consola.leerHoras());
         System.out.println("Horas añadidas correctamente.");
     }
-
+/*
     private void anadirPrecioMaterial() {
         Consola.mostrarCabecera("Añadir Precio Material Revisión");
         controlador.anadirPrecioMaterial(Consola.leerRevision(), Consola.leerPrecioMaterial());
         System.out.println("Precio material añadido correctamente.");
     }
-
+*/
     private void cerrarRevision() {
         Consola.mostrarCabecera("Cerrar Revisión");
         controlador.cerrar(Consola.leerRevision(), Consola.leerFechaCierre());

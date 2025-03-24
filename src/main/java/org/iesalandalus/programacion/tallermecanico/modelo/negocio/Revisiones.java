@@ -50,7 +50,7 @@ public class Revisiones {
 
     private void comprobarRevision(Cliente cliente, Vehiculo vehiculo, LocalDate fechaRevision) {
         for (Revision revision : coleccionRevision) {
-            if (!revision.estaCerrada()) {
+            if (!revision.estaCerrado()) {
                 if (revision.getCliente().equals(cliente)) {
                     throw new TallerMecanicoExcepcion("El cliente tiene otra revisión en curso.");
                 } else if (revision.getVehiculo().equals(vehiculo)) {
@@ -80,13 +80,13 @@ public class Revisiones {
         }
         return revisionEncontrada;
     }
-
+/*
     public Revision anadirPrecioMaterial(Revision revision, float precioMaterial) {
         Revision revisionEncontrada = getRevision(revision);
         revisionEncontrada.anadirPrecioMaterial(precioMaterial);
         return revisionEncontrada;
     }
-
+*/
     public Revision cerrar(Revision revision, LocalDate fechaFin) {
         Revision revisionEncontrada = getRevision(revision);
         revisionEncontrada.cerrar(fechaFin);

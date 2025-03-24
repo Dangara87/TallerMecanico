@@ -63,11 +63,11 @@ public class Controlador {
     public Revision anadirHoras(Revision revision, int horas) {
         return modelo.anadirHoras(revision, horas);
     }
-
+/*
     public Revision anadirPrecioMaterial(Revision revision, float precioMaterial) {
         return modelo.anadirPrecioMaterial(revision, precioMaterial);
     }
-
+*/
     public Revision cerrar(Revision revision, LocalDate fechaFin) {
         return modelo.cerrar(revision, fechaFin);
     }

@@ -67,11 +67,11 @@ public class Modelo {
     public Revision anadirHoras(Revision revision, int horas) {
         return new Revision(revisiones.anadirHoras(revision, horas));
     }
-
+/*
     public Revision anadirPrecioMaterial(Revision revision, float precioMaterial) {
         return new Revision(revisiones.anadirPrecioMaterial(revision, precioMaterial));
     }
-
+*/
     public Revision cerrar(Revision revision, LocalDate fechaFin) {
         return new Revision(revisiones.cerrar(revision, fechaFin));
     }

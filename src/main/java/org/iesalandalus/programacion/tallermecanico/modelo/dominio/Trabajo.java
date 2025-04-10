@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
-public class Trabajo {
+public class Trabajo{
     private static final float FACTOR_DIA = 10F;
     public static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yy");
     private LocalDate fechaInicio;
@@ -16,7 +16,7 @@ public class Trabajo {
     private Cliente cliente;
     private Vehiculo vehiculo;
 
-    public Trabajo(Cliente cliente, Vehiculo vehiculo, LocalDate fechaInicio) {
+    protected Trabajo(Cliente cliente, Vehiculo vehiculo, LocalDate fechaInicio) {
         setCliente(cliente);
         setVehiculo(vehiculo);
         setFechaInicio(fechaInicio);
@@ -24,7 +24,7 @@ public class Trabajo {
         horas = 0;
     }
 
-    public Trabajo(Trabajo trabajo) {
+    protected Trabajo(Trabajo trabajo) {
         Objects.requireNonNull(trabajo, "El trabajo no puede ser nulo.");
         cliente = new Cliente(trabajo.cliente);
         vehiculo = trabajo.vehiculo;

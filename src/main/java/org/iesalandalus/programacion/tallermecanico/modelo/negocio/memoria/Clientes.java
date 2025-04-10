@@ -1,14 +1,15 @@
-package org.iesalandalus.programacion.tallermecanico.modelo.negocio;
+package org.iesalandalus.programacion.tallermecanico.modelo.negocio.memoria;
 
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
+import org.iesalandalus.programacion.tallermecanico.modelo.negocio.IClientes;
 
 import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Objects;
 
-public class Clientes {
+public class Clientes implements IClientes {
 
     private final List<Cliente> coleccionClientes;
 
